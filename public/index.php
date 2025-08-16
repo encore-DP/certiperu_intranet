@@ -5,13 +5,16 @@ require __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::create();
 
-// Middleware para parsing de datos
-$app->addBodyParsingMiddleware();
-
-// Middleware de errores
+// Middleware de errores detallado
 $app->addErrorMiddleware(true, true, true);
 
-// Rutas
+// Ruta de prueba adicional
+$app->get('/ping', function ($request, $response) {
+    $response->getBody()->write('pong');
+    return $response;
+});
+
+// Cargar rutas principales
 require __DIR__ . '/../routes/web.php';
 
 $app->run();

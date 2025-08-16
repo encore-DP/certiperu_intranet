@@ -13,9 +13,10 @@ class AlumnoController {
     }
 
     // 📄 Listar alumnos
-    public function lista(Request $request, Response $response, array $args = []) {
+    public function lista(Request $request, Response $response) {
         $alumnos = $this->model->listar();
         ob_start();
+        // Corrige la ruta según tu estructura REAL
         include __DIR__ . "/../Views/alumnos/lista.php";
         $html = ob_get_clean();
         $response->getBody()->write($html);
@@ -57,7 +58,7 @@ class AlumnoController {
         $this->model->editar($id, $params['dni'], $params['nombre'], $params['apellido'], $params['empresa_id']);
         return $response->withHeader('Location', '/alumnos/lista')->withStatus(302);
     }
-    
+
     // 🗑 Eliminar alumno
     public function eliminar(Request $request, Response $response, array $args = []) {
         $id = $args['id'];
