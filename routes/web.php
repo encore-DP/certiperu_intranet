@@ -11,22 +11,21 @@ return function (App $app) {
 
     // ==== GRUPO ALUMNOS ====
     $app->group('/alumnos', function ($group) {
-        $group->get('/lista', [AlumnoController::class, 'lista']);
-        $group->get('/nuevo', [AlumnoController::class, 'nuevo']);
-        $group->post('/guardar', [AlumnoController::class, 'guardar']);
-        $group->get('/editar/{id}', [AlumnoController::class, 'editar']);
-        $group->post('/actualizar/{id}', [AlumnoController::class, 'actualizar']);
-        $group->get('/eliminar/{id}', [AlumnoController::class, 'eliminar']);
+        $group->get('/lista', AlumnoController::class . ':lista');
+        $group->get('/nuevo', AlumnoController::class . ':nuevo');
+        $group->post('/guardar', AlumnoController::class . ':guardar');
+        $group->get('/editar/{id}', AlumnoController::class . ':editar');
+        $group->post('/actualizar/{id}', AlumnoController::class . ':actualizar');
+        $group->get('/eliminar/{id}', AlumnoController::class . ':eliminar');
     });
 
-        // ==== GRUPO CURSOS ====
+    // ==== GRUPO CURSOS ====
     $app->group('/cursos', function ($group) {
-        $group->get('/lista', [CursoController::class, 'lista']);
-        $group->get('/nuevo', [CursoController::class, 'nuevo']);
-        $group->post('/guardar', [CursoController::class, 'guardar']);
-        $group->get('/editar/{id}', [CursoController::class, 'editar']);
-        $group->post('/actualizar/{id}', [CursoController::class, 'actualizar']);
-        $group->get('/eliminar/{id}', [CursoController::class, 'eliminar']);
+        $group->get('/lista', CursoController::class . ':lista');
+        $group->get('/nuevo', CursoController::class . ':nuevo');
+        $group->post('/guardar', CursoController::class . ':guardar');
+        $group->get('/editar/{id}', CursoController::class . ':editar');
+        $group->post('/actualizar/{id}', CursoController::class . ':actualizar');
+        $group->get('/eliminar/{id}', CursoController::class . ':eliminar');
     });
 };
-
