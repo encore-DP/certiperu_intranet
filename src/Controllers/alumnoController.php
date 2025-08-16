@@ -13,7 +13,7 @@ class AlumnoController {
     }
 
     // 📄 Listar alumnos
-    public function lista(Request $request, Response $response) {
+    public function lista(Request $request, Response $response, array $args = []) {
         $alumnos = $this->model->listar();
         ob_start();
         include __DIR__ . "/../Views/alumnos/lista.php";
@@ -22,8 +22,9 @@ class AlumnoController {
         return $response;
     }
 
+
     // 📄 Formulario nuevo alumno
-    public function nuevo(Request $request, Response $response) {
+    public function nuevo(Request $request, Response $response, array $args = []) {
         ob_start();
         include __DIR__ . "/../Views/alumnos/nuevo.php";
         $html = ob_get_clean();
@@ -32,16 +33,16 @@ class AlumnoController {
     }
 
     // 💾 Guardar alumno nuevo
-    public function guardar(Request $request, Response $response) {
+    public function guardar(Request $request, Response $response, array $args = []) {
         $params = (array) $request->getParsedBody();
         $this->model->insertar($params['dni'], $params['nombre'], $params['apellido'], $params['empresa_id']);
         return $response->withHeader('Location', '/alumnos/lista')->withStatus(302);
     }
 
     // 📄 Formulario editar alumno
-    public function editar(Request $request, Response $response, array $args) {
+    public function editar(Request $request, Response $response, array $args = []) {
         $id = $args['id'];
-        $alumno = $this->model->buscarPorId($id); // 🔹 Necesitamos agregar este método en el modelo
+        $alumno = $this->model->buscarPorId($id); 
         ob_start();
         include __DIR__ . "/../Views/alumnos/editar.php";
         $html = ob_get_clean();
@@ -50,15 +51,15 @@ class AlumnoController {
     }
 
     // 💾 Actualizar alumno
-    public function actualizar(Request $request, Response $response, array $args) {
+    public function actualizar(Request $request, Response $response, array $args = []) {
         $id = $args['id'];
         $params = (array) $request->getParsedBody();
         $this->model->editar($id, $params['dni'], $params['nombre'], $params['apellido'], $params['empresa_id']);
         return $response->withHeader('Location', '/alumnos/lista')->withStatus(302);
     }
-
+    
     // 🗑 Eliminar alumno
-    public function eliminar(Request $request, Response $response, array $args) {
+    public function eliminar(Request $request, Response $response, array $args = []) {
         $id = $args['id'];
         $this->model->eliminar($id);
         return $response->withHeader('Location', '/alumnos/lista')->withStatus(302);
