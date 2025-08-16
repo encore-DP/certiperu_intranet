@@ -1,9 +1,9 @@
 <?php
 function getDB() {
     $host = 'localhost';
-    $db   = 'certificados_sistema';
-    $user = 'admin123';
-    $pass = 'admin123';
+    $db   = 'delcorbc_certiperu_intranet';
+    $user = 'delcorbc_encore';
+    $pass = 'EncoreDP2025$$';
     $charset = 'utf8mb4';
 
     $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
